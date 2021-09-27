@@ -2,7 +2,7 @@ n  = int(input())
 
 longest_interset=set()
 for _ in range(n):
-    first, second = input().split('-')
+    first, second = input().split('-') 
     first_start, first_end = [int(x) for x in first.split(',')]
     second_start, second_end = [int(x) for x in second.split(',')]
     first_range = set(range(first_start,first_end+1))
