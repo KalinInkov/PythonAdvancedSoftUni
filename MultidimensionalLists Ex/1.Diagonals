@@ -1,0 +1,23 @@
+def read_matrix():
+    n = int(input())
+    #n,m = map(int, input().split(', '))
+
+    matrix = []
+    for _ in range(n):
+        row = [int(x) for x in input().split(', ')]
+        matrix.append(row)
+
+    return matrix
+
+matrix = read_matrix()
+
+n = len(matrix)
+primary_diagnonal = [matrix[i][i] for i in range(n)]
+secondary_diagnonal = [matrix[i][n-i-1] for i in range(n)]
+print(f'Primary diagonal: {", ".join (str (x) for x in primary_diagnonal)}. \
+Sum: {sum(primary_diagnonal)}'
+)
+
+print(f'Secondary diagonal: {", ".join (str (x) for x in secondary_diagnonal)}. \
+Sum: {sum(secondary_diagnonal)}'
+)
