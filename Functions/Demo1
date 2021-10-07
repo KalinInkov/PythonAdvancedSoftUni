@@ -1,0 +1,13 @@
+# Packing and unpacking arguments
+
+def f ():
+    pass
+
+def add(x,y,z):
+    return x+y+z
+
+print(add(5,6,8))
+
+print(
+    add(4,5 ,z=8)
+)
