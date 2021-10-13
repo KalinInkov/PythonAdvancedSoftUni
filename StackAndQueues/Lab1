@@ -1,0 +1,8 @@
+data  = list(input())
+new_data = []
+
+while len(data)>0:
+    new_data.append(data.pop())
+
+
+print(f'{"".join(new_data)}')
