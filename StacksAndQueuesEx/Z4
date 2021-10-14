@@ -1,0 +1,28 @@
+import sys
+from io import StringIO
+test_input1 = """5 4 8 6 3 8 7 7 9
+16
+"""
+
+test_input2 = """1 7 8 2 5 4 7 8 9 6 3 2 5 4 6
+20
+"""
+sys.stdin = StringIO(test_input1)
+#sys.stdin = StringIO(test_input2)
+
+
+
+box = [int(x) for x in input().split()]
+rack_capacity = int(input())
+number_of_racks = 1
+current_rack_weight = 0
+
+for i in range(len(box)):
+    current_clothing = box.pop()
+    if current_clothing+current_rack_weight>rack_capacity:
+        number_of_racks+=1
+        current_rack_weight=0
+    current_rack_weight+=current_clothing
+print(number_of_racks)
+
+
