@@ -1,0 +1,38 @@
+def unpack_price_list(budget, **kwargs):
+    current_money = budget
+    price_list = list(price_list_only(kwargs))
+    dd = price_list[0]
+    return dd
+
+def read_price_list(budget, **kwargs):
+    price_list = unpack_price_list(budget, **kwargs)
+    price_list_n = list(map(list, (price_list.items())))
+    return price_list_n
+
+def price_list_only(*args):
+    return args
+
+def shopping_list(budget,**kwargs):
+    current_money = budget
+    products_purcahsed = 0
+
+    if budget<100:
+        return "You do not have enough budget."
+    essential_list= unpack_price_list(budget, **kwargs)
+    modified_list=[]
+    for k, v in essential_list.items():
+        if current_money <= 0:
+            break
+        if products_purcahsed > 4:
+            break
+        price, quantity = v[0], v[1]
+        current_price = price * quantity
+        if current_money < current_price:
+            continue
+        else:
+            current_money -= current_price
+            products_purcahsed += 1
+            c=f'You bought {k} for {current_price:.2f} leva.'
+            modified_list.append(c)
+    new_line = '\n'
+    return f"{new_line.join(map(str, modified_list))}"
