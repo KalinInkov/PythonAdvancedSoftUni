@@ -1,0 +1,79 @@
+from collections import deque
+# import sys
+# from io import StringIO
+# 
+# test_input1 = """105 20 30 25
+# 120 60 11 400 10 1
+# """
+# test_input2 = """30 5 21 6 0 91
+# 15 9 5 15 8
+# """
+# test_input3 = """200
+# 5 15 32 20 10 5
+# """
+# #sys.stdin = StringIO(test_input1)
+# #sys.stdin = StringIO(test_input2)
+# sys.stdin = StringIO(test_input3)
+
+materials = [int(x) for x in input().split()]
+magic_levels = deque(int(x) for x in input().split())
+gift_succeed = False
+gifts = {
+    'Gemstone':0,
+    'Porcelain Sculpture':0,
+    'Gold':0,
+    'Diamond Jewellery':0
+}
+
+while materials and magic_levels:
+    current_material = materials[-1]
+    current_magic_level = magic_levels[0]
+    sum_gift = current_material+current_magic_level
+
+    if sum_gift<100:
+        if sum_gift%2==0:
+            sum_gift=current_material*2+current_magic_level*3
+        else:
+            sum_gift*=2
+
+    if sum_gift>499:
+        sum_gift/=2
+
+    if 100<=sum_gift<=199:
+        gifts['Gemstone']+=1
+        materials.pop()
+        magic_levels.popleft()
+    elif 200<=sum_gift<=299:
+        materials.pop()
+        magic_levels.popleft()
+        gifts['Porcelain Sculpture']+=1
+    elif 300<=sum_gift<=399:
+        materials.pop()
+        magic_levels.popleft()
+        gifts['Gold']+=1
+    elif 400<=sum_gift<=499:
+        materials.pop()
+        magic_levels.popleft()
+        gifts['Diamond Jewellery']+=1
+    else:
+        materials.pop()
+        magic_levels.popleft()
+
+    if (gifts['Gemstone']>=1 and gifts['Porcelain Sculpture']>=1) or (gifts['Gold']>=1 and gifts['Diamond Jewellery']>=1):
+        gift_succeed = True
+
+
+
+if gift_succeed:
+    print("The wedding presents are made!")
+else:
+    print("Aladdin does not have enough wedding presents.")
+if materials:
+    print(f"Materials left: {', '.join([str(x) for x in materials])}")
+if magic_levels:
+    print(f"Magic left: {', '.join([str(x) for x in magic_levels])}")
+
+[print(k,v,sep=': ') for k,v in sorted(gifts.items()) if int(v)>0 ]
+
+
+
