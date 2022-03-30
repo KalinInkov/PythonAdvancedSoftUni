@@ -1,0 +1,49 @@
+from collections import deque
+# import sys
+# from io import StringIO
+# 
+# test_input1 = """4 2 10 5
+# 3 15 15 11 6
+# """
+# test_input2 = """1 5 28 1 4
+# 3 18 1 9 30 4 5
+# """
+# test_input3 = """10 20 30 40 50
+# 20 11
+# """
+# 
+# #sys.stdin=StringIO(test_input1)
+# #sys.stdin=StringIO(test_input2)
+# sys.stdin=StringIO(test_input3)
+
+cups = deque([int(x) for x in input().split()])
+bottles = [int(x) for x in input().split()]
+wasted_liters = 0
+
+while cups or bottles:
+    if not bottles:
+        break
+
+
+    if cups and bottles:
+        current_cup = cups.popleft()
+        current_bottle = bottles.pop()
+        if current_bottle>=current_cup:
+            wasted_liters+=current_bottle-current_cup
+
+        else:
+            cups.appendleft(current_cup-current_bottle)
+
+
+    else:
+        break
+
+if cups:
+    print(f"Cups: {' '.join([str(x) for x in cups])}")
+    print(f"Wasted litters of water: {wasted_liters}")
+if bottles:
+    print(f"Bottles: {' '.join([str(x) for x in bottles])}")
+    print(f"Wasted litters of water: {wasted_liters}")
+
+
+
